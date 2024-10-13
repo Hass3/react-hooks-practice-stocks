@@ -1,6 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 
-function SearchBar() {
+function SearchBar({onSort}) {
+  const[filterValue, setFilterValue]= useState('')
+  const[checkedValue, setCheckedValue] = useState(null)
+
+  function onSortChange(e){
+    setCheckedValue(e.target.value)
+    onSort(e.target.checked === "Alphabetically")
+  }
   return (
     <div>
       <strong>Sort by:</strong>
@@ -9,8 +16,8 @@ function SearchBar() {
           type="radio"
           value="Alphabetically"
           name="sort"
-          checked={null}
-          onChange={null}
+          checked={checkedValue === "Alphabetically"}
+          onChange={onSortChange}
         />
         Alphabetically
       </label>
@@ -19,8 +26,8 @@ function SearchBar() {
           type="radio"
           value="Price"
           name="sort"
-          checked={null}
-          onChange={null}
+          checked={checkedValue === "Price"}
+          onChange={onSortChange}
         />
         Price
       </label>
