@@ -19,26 +19,36 @@ function MainContainer() {
     setPortfolio(sellStock);
   }
 
-  // function onSort(value){
-  //   const alphabeticallyStocks = filterStocks.sort((a,b)=>a.name.localeCompare(b.name))
-  //   const priceSorted = filterStocks.sort((a, b) => a.price - b.price)
-  //   if(value === "Alphabetically"){
-  //     setStocks(alphabeticallyStocks)
-  //   }
-  //   // }
-  //   // else if(value === "Price"){
-  //   //   setStocks(priceSorted)                                                              //******WORK ON SEARCH ONLY */
-  //   // }
-  //   // else {
-  //   //   setStocks(filterStocks)
-  //   // }
-  // }
+  function onSort(value){
+      if(value === "Price"){
+        const priceSorted = [...filterStocks].sort((a, b) => a.price - b.price)
+        setStocks(priceSorted)
 
+    }
+     if(value === "Alphabetically"){
+      const alphabeticallyStocks = [...filterStocks].sort((a,b)=>a.ticker.localeCompare(b.ticker))
+      setStocks(alphabeticallyStocks)
+    }
+    }
 
+  function onType(value){
+    if(value === "Tech"){
+      const techStocks = filterStocks.filter(stock=> stock.type === "Tech")
+      setStocks(techStocks)
+    }
+    if(value === "Finance"){
+      const finaceStocks = filterStocks.filter(stock=> stock.type === "Finance") 
+      setStocks(finaceStocks)
+    }
+    if(value === "Sportswear"){
+      const sportWearStocks = filterStocks.filter(stock=> stock.type === "Sportswear")
+      setStocks(sportWearStocks)
+    }
+  }
 
   return (
     <div>
-      <SearchBar onSort ={onSort} />
+      <SearchBar onSort ={onSort} onType={onType}/>
       <div className="row">
         <div className="col-8">
           <StockContainer stocks = {stocks} setStocks={setStocks} setFilterStocks = {setFilterStocks} onBuy ={onBuy} />

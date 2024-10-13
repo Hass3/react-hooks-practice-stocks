@@ -6,7 +6,7 @@ function PortfolioContainer({stocks, onSell}) {
     <div>
       <h2>My Portfolio</h2>
       {
-        stocks.map(stock=> <Stock key={stock.name} name={stock.name} price={stock.price} onClick={()=> onSell(stock.name, stock.price)} />)
+        stocks.map(stock=> <Stock key={stock.name} name={stock.name} price={stock.price} onClick={()=> onSell(stock.name)} />)
       }
     </div>
   );
